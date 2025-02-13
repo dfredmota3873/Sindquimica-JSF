@@ -1,12 +1,11 @@
-#Some setup information :).
+Projeto JSF - Sindquimica para cadastro de cnaes, empresas , envio de mensagens 
 
-##JSF setup
+Tecnologias Ultilizadas:
 
-If you are in ServletContainer, like Tomcat or Jetty, alter your pom.xml in order to change the scope of **jsf-api** from
-**provided** to **compile**.
-  	
-##JAVA EE JPA setup
+JSF 2
+Prime Faces
+Hibernate
+Facelets
 
-You need to change your **persistence.xml** file and put your login, password and url information about the database.
   	
 
