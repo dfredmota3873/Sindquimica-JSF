@@ -1,0 +1,7 @@
+{
+  "realm": "quarkus",
+  "public_key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlmtyXVBWvcxdIYSenT2s1qzKzVsBR35fGlwNKY5Wy4Q+kaVFua7mrOr6T+KnLG8l1zXxwZHN6ZSd8PShfLRYLRPkN3DO0pdURlpoOavVGQiAXctbPTGGEgxxb5i+amKXKP+MyVC8NQqvY5XNboEzA2/3904nta2WWOOiGYRMuUrVQgpIvc9ljl+vuNGkF8VDgacVc/hD4INgNQZ/QzrOmv/ogsBQ3wYO0pYdGSATpwldx7VcbXststoUnp6UBmaug8ywSek7qJ77KG52wf2qaV2YBaZM9Si6HOh4IAGZAIhZJxdQ9fjActCKf++eCVnN5gg67PNC00HRujMbI/6MEwIDAQAB",
+  "token-service": "http://localhost:49263/realms/quarkus/protocol/openid-connect",
+  "account-service": "http://localhost:49263/realms/quarkus/account",
+  "tokens-not-before": 0
+}

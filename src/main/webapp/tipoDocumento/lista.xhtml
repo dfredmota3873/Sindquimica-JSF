@@ -1,0 +1,55 @@
+<ui:composition template="/template/layout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+     <ui:define name="content">
+     <h:form id="form">   
+    <h2>Lista de Tipo de Documento</h2>
+    
+    <br/>   
+    
+    <h:commandButton value="Incluir" action="#{tipoDocumentoMB.prepareInsert}" class="btn btn-primary" />
+    
+    <h:commandButton ajax="false" title="Pesquisar" action="#{tipoDocumentoMB.searchByFilters}"
+              value="Pesquisar"  class="btn btn-primary" style="background-color:#008B8B;margin-left:20px;"/>
+    
+    <br/>     
+    <br/>
+    
+    	<p:fieldset>
+	
+    <div class="form-group">
+	<label for="1" class="col-sm-1 control-label">Nome</label>
+	<div class="col-sm-3">
+	<h:inputText id="filter_nome" value="#{tipoDocumentoMB.descricaoFiltro}" class="form-control" size="10" />
+	</div>
+	</div>
+	
+	
+ 	</p:fieldset>   
+    
+    <br/>
+         
+
+    <p:dataTable var="tipoDocumento" value="#{tipoDocumentoMB.lista}" paginator="true" rows="10"
+    			 rowKey="#{tipoDocumento.id}" paginatorPosition="bottom"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{tipoDocumentoMB.tipoDocumento}" id="tipoDocumentoTable" lazy="true">
+        <p:ajax event="rowSelect" listener="#{tipoDocumentoMB.onRowSelect}" oncomplete="document.getElementById('form:btnOpenShow').click();" />
+        <p:column headerText="Id"  width="5%">
+            <h:outputText value="#{tipoDocumento.id}" />
+        </p:column>
+        <p:column headerText="Descrição" sortBy="#{tipoDocumento.descricao}" filterBy="#{tipoDocumento.descricao}">
+            <h:outputText value="#{tipoDocumento.descricao}" />
+        </p:column>
+    </p:dataTable>
+             
+        <h:commandButton ajax="false" title="Edit" action="/tipoDocumento/show.xhtml" id="btnOpenShow" style="display:none"
+            value="Show">    
+        <f:setPropertyActionListener target="#{tipoDocumentoMB.tipoDocumento}" value="#{tipoDocumentoMB.tipoDocumento}" />
+        </h:commandButton>
+    </h:form>
+</ui:define>
+</ui:composition>

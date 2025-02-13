@@ -1,0 +1,75 @@
+<ui:composition template="/template/layout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+     <ui:define name="content">
+     <h:form id="form">   
+    <h2>Lista de Grupos</h2>
+    
+    <br/>   
+    
+    <h:commandButton value="Incluir" action="#{grupoMB.prepareInsert}" class="btn btn-primary"/>
+    
+    <h:commandButton ajax="false" title="Pesquisar" action="#{grupoMB.searchByFilters}"
+              value="Pesquisar"  class="btn btn-primary" style="background-color:#008B8B;margin-left:20px;"/>
+    
+    <br/>     
+    <br/>
+    
+    	<p:fieldset>
+	
+    <div class="form-group">
+	<label for="1" class="col-sm-1 control-label">Nome</label>
+	<div class="col-sm-3">
+	<h:inputText id="filter_nome" value="#{grupoMB.descricaoFiltro}" class="form-control" size="10" />
+	</div>
+	</div>
+	
+	
+ 	</p:fieldset>   
+    
+    <br/>    
+
+			<div class="form-group">
+				<label for="4" class="col-sm-1 control-label">Cnae</label>
+				<div class="col-sm-5" style="margin-left:-40px">
+					<p:selectOneMenu value="#{grupoMB.cnaeId}" id="cnaeId">
+						<f:selectItems value="#{grupoMB.cnaes}" var="cnae"
+							itemLabel="#{cnae.descricao}" itemValue="#{cnae.id}" />
+					</p:selectOneMenu>
+				</div>
+				<h:commandButton ajax="false" title="Search"
+					action="#{grupoMB.search}" id="btnAddCnae" value="Pesquisar"
+					class="btn btn-primary" style="margin-left:10px" />
+			</div>
+			
+			<br/>     
+    		<br/>
+
+
+			<p:dataTable var="grupo" value="#{grupoMB.lista}" paginator="true" rows="10"
+    			 rowKey="#{grupo.id}" paginatorPosition="bottom"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{grupoMB.grupo}" id="grupoTable" lazy="true">
+        <p:ajax event="rowSelect" listener="#{grupoMB.onRowSelect}" oncomplete="document.getElementById('form:btnOpenShow').click();" />
+        <p:column headerText="Id"  width="5%">
+            <h:outputText value="#{grupo.id}" />
+        </p:column>
+        <p:column headerText="Nome" >
+            <h:outputText value="#{grupo.nome}" />
+        </p:column>
+        <p:column headerText="Participantes" >
+            <h:outputText value="#{grupo.participantes}" />
+        </p:column>
+
+    </p:dataTable>
+             
+        <h:commandButton ajax="false" title="Edit" action="/grupo/show.xhtml" id="btnOpenShow" style="display:none"
+            value="Show">    
+        <f:setPropertyActionListener target="#{grupoMB.grupo}" value="#{grupoMB.grupo}" />
+        </h:commandButton>
+    </h:form>
+</ui:define>
+</ui:composition>

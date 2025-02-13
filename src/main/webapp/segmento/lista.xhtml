@@ -1,0 +1,59 @@
+<ui:composition template="/template/layout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core">
+     <ui:define name="content">
+     <h:form id="form">   
+    <h2>Lista de Segmentos</h2>
+    
+    
+
+    
+    <br/>   
+    
+    <h:commandButton value="Incluir" action="#{segmentoMB.prepareInsert}" class="btn btn-primary" />
+       <h:commandButton ajax="false" title="Pesquisar" action="#{segmentoMB.searchByFilters}"
+              value="Pesquisar"  class="btn btn-primary" style="background-color:#008B8B;margin-left:20px;"/>
+    
+    <br/>     
+    <br/>
+    
+    	<p:fieldset>
+	
+    <div class="form-group">
+	<label for="1" class="col-sm-1 control-label">Nome</label>
+	<div class="col-sm-3">
+	<h:inputText id="filter_nome" value="#{segmentoMB.descricaoFiltro}" class="form-control" size="10" />
+	</div>
+	</div>
+	
+	
+ 	</p:fieldset>   
+    
+    <br/>
+
+
+    <p:dataTable var="segmento" value="#{segmentoMB.lista}" paginator="true" rows="10"
+    			 rowKey="#{segmento.id}" paginatorPosition="bottom"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{segmentoMB.segmento}" id="segmentoTable" lazy="true">
+        <p:ajax event="rowSelect" listener="#{segmentoMB.onRowSelect}" oncomplete="document.getElementById('form:btnOpenShow').click();" />
+        <p:column headerText="Id"  width="5%">
+            <h:outputText value="#{segmento.id}" />
+        </p:column>
+        <p:column headerText="Descrição" >
+            <h:outputText value="#{segmento.descricao}" />
+        </p:column>
+    </p:dataTable>
+             
+        <h:commandButton ajax="false" title="Edit" action="/segmento/show.xhtml" id="btnOpenShow" style="display:none"
+            value="Show">    
+        <f:setPropertyActionListener target="#{segmentoMB.segmento}" value="#{segmentoMB.segmento}" />
+        </h:commandButton>
+    </h:form>
+</ui:define>
+</ui:composition>
